@@ -14,58 +14,86 @@
 * [Results and Conclusion](#results-and-conclusion)
 
 ### Introduction
-The objective of the project is to develop a product recommendation system based on the customer’s interest. The purchase history is retrieved to capture customer’s inclination for a set of products available in the store. The data extraction, exploration, transformation and analysis would be achieved through Apache Spark system. Based on the analysis, the system would recommend products for customers who would most likely be inclined to buy a set of products along with the current product picked up for check out. This recommendation system is intended to help e-commerce web sites to service customers with appropriate recommendations at the right time with an attractive price tag.
+The objective of the project is to predicted the department wise sales for 45 Walmart stores modeling the effects of markdowns on holidays . You are provided with historical sales data for 45 Walmart stores located in different regions. Each store contains a number of departments, and you are tasked with predicting the department-wide sales for each store.
+
+In addition, Walmart runs several promotional markdown events throughout the year. These markdowns precede prominent holidays, the four largest of which are the Super Bowl, Labor Day, Thanksgiving, and Christmas. The weeks including these holidays are weighted five times higher in the evaluation than non-holiday weeks. Part of the challenge presented by this competition is modeling the effects of markdowns on these holiday weeks in the absence of complete/ideal historical data.
 
 ### Problem Statement
-* Build a product recommendation system based on the customer’s interest.
+* Predicted the department wise sales for 45 Walmart stores modeling the effects of markdowns on holidays using the ARIMA and Holt-Winters model
 
 ### Data Source
-* The Dataset was obtained from the website: https://nijianmo.github.io/amazon/index.html
-  The data set is a part of Amazon review dataset released in 2014, provided by UCSD.
+* Kaggle - https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting
 
 ### Technologies
-* Python 3.6.7
-* PySpark 3.0.0
+* R 3.6.2
+* R Studio
 
 ### Type of Data
-* The data set contains data for 287,209 products with 5,074,160 reviews and ratings by 1, 57,386 unique users.
-* The data does not contain any null values
-* Train : 80%
-* Test  : 20%
+*  In the given data, we have 45 stores and each stores have around 90 departments.
 
-### Data Pre-processing
-* Tokenizing, removal of stop words and stemming was done for textual data
+### Data Preparation
+* The data of store 1 of all 45 stores for our forecast analysis
+* Holt Winters, ARIMA, Naïve, & Mean method are used for comparison
+* The demand values are the total demand of all departments combined for the week.
 
-### Steps Involved
+### Algorithms Implemented
+* Holts Winter Model
+* Naive method and Mean method
+* ARIMA method
 
-## Technique 1 - K-Means(Context Based Filtering)
-* Based on the reviews obtained above we have created its TF-IDF using TfidfVectorizer function.
-* Since we are handling huge amount of data with our data frame having 5,074,160 reviews we have done rest of the operations in Apache Spark for efficient and faster handling of big data. We have created a Spark data frame from the pandas reviews data frame
-* Next we have created a data cleaning pipeline using the Pipeline function in which we have cleaned the spark data frame by tokenizing the reviews, removing stop words, calculated the term frequencies (TF) and IDF for the tokenized words.
-* We have clustered the products. So now whenever a new input keyword has been searched, it would pass through pipeline for cluster assignment. Products under the respective cluster are up for recommendation.
+### Exploratory Analysis
 
-## Technique 2 - ALS Collaborative Filtering Algorithm
-* We have obtained a Spark data frame containing item id, user id and ratings
-* Alternating Least Squares algorithm requires the inputs to be numerical and integers with value less than 2,147,483,647 (32-bit limit). So we have created new index for      item_id and user_id using StringIndexer with definitive mapped values for each user and item.
-* We have split the data into (80%) training and (20%) testing. We have used ALS (Alternating Least Squares) algorithm for training the data.
-* We have evaluated the model on the test data. We have got RMSE value of 1.134. We thought that it might be over fitting the data so we implemented 5-fold Cross Validation in the next step.
-* After implementing 5-fold ALS Cross Validation and evaluating on the test data we have obtained a RMSE value of 0.8345 which showed an improvement from the previous time.
-* Finally, using our model we are obtaining TOP 10 recommendations for all the users in our data frame.
+* Holts Winter Model
+
+![alt text](/pics/walmart1.JPG)
+
+We understand from the above sales plot that there is a seasonality to the data which needs to be removed before proceeding for the Forecast
+
+* Naive method and Mean method
+
+![alt text](/pics/walmart2.JPG)
+
+Comparing both these plots with the sales Plot, we can infer that Fuel prices doesn’t affect 
+the sales and as the temperature changes from season to season, it can be considered as part 
+of seasonality  and can be de-seasonalised. 
+
+### Model 1 - Holts Winter Model
+![alt text](/pics/walmart3.JPG)
+
+* We can see that the demand is significantly high in the Q1 and Q4 in each year
+* This data also signifies that the demand values follow the same trend.
+* The forecast says that the Testing data follows the same trend.
+* But, 2012 Q1 & Q2 demand values shows that most of the predicted data lies outside the 80% & 95% confidence levels.
+
+### Model 2 - Naive method and Mean method
+![alt text](/pics/walmart4.JPG)
+
+* Both these methods infer that we get the forecast well within the confidence level.
+* But the forecasted data did not show any trend and is flat throughout the period.
+* Hence these methods are not recommended for predicting the future sales.
   
-### Evaluation Metrics  
-RMSE (Root Mean Square Error) 
+### Model 3 - ARIMA Model
+![alt text](/pics/walmart5.JPG)
 
-### Results and Conclusion
-By analyzing our dataset through various tools like R, Python, Pyspark we developed a product recommendation system based on the customer’s interest. We have used 2 different models for this purpose i.e. KNN and ALS Collaborative Filtering.
+* By look of the forecast plot, we can say that the data follows the previous period`s trend and is well within the confidence levels. 
+* We need to find the accuracy of each plot in addition to the confidence levels and trend to determine the best model.
 
-For the KNN which does context based filtering, we have tested our model with a test data which shows products under their respective cluster. It shows the products which are closely related to Kit Kat.
+### Forecast Value Analysis (FVA) 
 
-![alt text](rec_res1.JPG)
+#### Predicting the best model
+From all the 4 forecasting methods, we can see that the Forecast in the Increasing trend and inline with the testing data.
+By calculating the MAPE of all these models we found that:
 
-On implementing the ALS Collaborative Filtering Algorithm, we have used ALS model in which we have obtained RMSE value of 1.134.
+* MAPE Naïve method: 28.91%
+* MAPE Mean method: 19.08%
+* MAPE ARIMA method: 1.81%
+* MAPE Holt Winters Method: 20.56%
 
-![alt text](rec_res2.JPG)
+ARIMA has the lowest error and hence it is the best method to forecast the Sales data
 
-On using 5-fold cross validation and evaluating on the test data the RMSE value showed an improvement. We obtained RMSE value of 0.8345.
+### Forecast of Sales- ARIMA Method- One Store
+![alt text](/pics/walmart6.JPG)
 
-![alt text](rec_res3.JPG)
+### Forecast Data & Results
+![alt text](/pics/walmart7.JPG)
+
