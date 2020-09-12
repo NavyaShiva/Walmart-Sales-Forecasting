@@ -1,6 +1,6 @@
 # Walmart-Sales-Forecasting
 
-![alt text](Walmart-Sales-Forecasting/pics/walmart0.jpg)
+![alt text](/pics/walmart0.jpg)
 
 ### Table of contents
 * [Introduction](#introduction)
