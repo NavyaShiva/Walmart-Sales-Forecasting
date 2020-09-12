@@ -14,7 +14,7 @@
 * [Models Analysis](#models-analysis)
 * [Forecast Value Analysis(FVA)](#forecast-value-analysis(fva))
 * [Forecast of Sales - ARIMA Method - One Store](#forecast-of-sales---arima-method---one-store)
-* [Forecast Data & Results](#Forecast-Data-&-Results)
+* [Forecast Data & Results](#forecast-data-&-results)
 
 ### Introduction
 The objective of the project is to predicted the department wise sales for 45 Walmart stores modeling the effects of markdowns on holidays . You are provided with historical sales data for 45 Walmart stores located in different regions. Each store contains a number of departments, and you are tasked with predicting the department-wide sales for each store.
