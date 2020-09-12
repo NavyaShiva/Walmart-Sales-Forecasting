@@ -8,9 +8,12 @@
 * [Data Source](#data-source)
 * [Technologies](#technologies)
 * [Type of Data](#type-of-data)
-* [Data Pre-processing](#data-pre-processing)
-* [Steps Involved](#steps-involved)
-* [Evaluation Metrics](#evaluation-metrics)
+* [Data Preparation](#data-preparation)
+* [Algorithms Implemented](#algorithms-implemented)
+* [Exploratory Analysis](#exploratory-analysis)
+* [Models Analysis](#models-analysis)
+* [Forecast Value Analysis(FVA)](#forecast-value-analysis(fva))
+* [Forecast of Sales - ARIMA Method - One Store](#forecast-of-sales-arima-method-one-store)
 * [Results and Conclusion](#results-and-conclusion)
 
 ### Introduction
@@ -57,6 +60,8 @@ Comparing both these plots with the sales Plot, we can infer that Fuel prices do
 the sales and as the temperature changes from season to season, it can be considered as part 
 of seasonality  and can be de-seasonalised. 
 
+### Models Analysis
+
 ### Model 1 - Holts Winter Model
 ![alt text](/pics/walmart3.JPG)
 
@@ -78,7 +83,7 @@ of seasonality  and can be de-seasonalised.
 * By look of the forecast plot, we can say that the data follows the previous period`s trend and is well within the confidence levels. 
 * We need to find the accuracy of each plot in addition to the confidence levels and trend to determine the best model.
 
-### Forecast Value Analysis (FVA) 
+### Forecast Value Analysis(FVA) 
 
 #### Predicting the best model
 From all the 4 forecasting methods, we can see that the Forecast in the Increasing trend and inline with the testing data.
@@ -91,7 +96,7 @@ By calculating the MAPE of all these models we found that:
 
 ARIMA has the lowest error and hence it is the best method to forecast the Sales data
 
-### Forecast of Sales- ARIMA Method- One Store
+### Forecast of Sales - ARIMA Method - One Store
 ![alt text](/pics/walmart6.JPG)
 
 ### Forecast Data & Results
