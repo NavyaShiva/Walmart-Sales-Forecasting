@@ -13,7 +13,7 @@
 * [Exploratory Analysis](#exploratory-analysis)
 * [Models Analysis](#models-analysis)
 * [Forecast Value Analysis(FVA)](#forecast-value-analysis(fva))
-* [Forecast of Sales - ARIMA Method - One Store](#forecast-of-sales-arima-method-one-store)
+* [Forecast of Sales - ARIMA Method - One Store](#forecast-of-sales---arima-method---one-store)
 * [Results and Conclusion](#results-and-conclusion)
 
 ### Introduction
